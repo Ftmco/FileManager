@@ -1,3 +1,4 @@
+using File.Implemention.Injector;
 using File.Server.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+await builder.Services.AddFileServicesAsync(builder.Configuration);
 
 var app = builder.Build();
 

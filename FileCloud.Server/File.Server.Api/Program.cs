@@ -1,7 +1,6 @@
-using File.DataBase.Context;
-using Microsoft.EntityFrameworkCore;
+using File.Implemention.Injector;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -9,12 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<FileContext>(options =>
-{
-    string cnn = builder.Configuration.GetConnectionString("File_Db");
-    FileContext.ConnectionString = cnn;
-    options.UseSqlServer(cnn);
-});
+await builder.Services.AddFileServicesAsync(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -31,4 +26,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
