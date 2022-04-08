@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\File.DataBase\File.DataBase.csproj" />
     <ProjectReference Include="..\File.Implemention\File.Implemention.csproj" />
+    <ProjectReference Include="..\File.ViewModel\File.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>
