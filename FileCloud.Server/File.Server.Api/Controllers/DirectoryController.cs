@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using File.Abstraction;
+using File.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace File.Server.Api.Controllers;
@@ -7,16 +8,24 @@ namespace File.Server.Api.Controllers;
 [ApiController]
 public class DirectoryController : ControllerBase
 {
-    readonly IConfiguration _configuration;
+    readonly IDirectoryAction _directoryAction;
 
-    public DirectoryController(IConfiguration configuration)
+    public DirectoryController(IDirectoryAction directoryAction)
     {
-        _configuration = configuration;
+        _directoryAction = directoryAction;
     }
 
-    [HttpPost("CreateDirectory")]
-    public async Task<IActionResult> CreateDirectoryAsync()
+    [HttpPost("UpsertDirectory")]
+    public async Task<IActionResult> UpsertDirectoryAsync(UpsertDirectory upsert)
     {
-       
+        UpsertDirectoryResponse? directory = await _directoryAction.UpsertAsync(upsert, HttpContext);
+        return directory.Status switch
+        {
+            DirecttoryActionStatus.Success => Ok(Success("دایرکتوری با موفقیت ثبت شد", "", directory.Directory)),
+            DirecttoryActionStatus.AccessDenied => Ok(Faild(403, "شما به این بخش دسترسی ندارید لطفا وارد حساب کاربری شوید", "")),
+            DirecttoryActionStatus.Exception => Ok(ApiException("خطایی رخ داد مجددا تلاش کنید", "")),
+            DirecttoryActionStatus.ObjectNotFound => Ok(Faild(404, "دایرکتوری مورد نظر یافت نشد", "")),
+            _ => Ok(ApiException("خطایی رخ داد مجددا تلاش کنید", "")),
+        };
     }
 }
