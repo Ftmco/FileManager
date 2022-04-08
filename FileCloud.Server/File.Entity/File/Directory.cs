@@ -23,7 +23,14 @@ public record FDirectory
     [Required]
     public bool IsActive { get; set; }
 
+    public Guid? ParentId { get; set; }
+
+    [Required]
+    public string Path { get; set; }
+
     //Navigation Property
     //Relationships
     public virtual ICollection<DirectoryFile> Files { get; set; }
+
+    public virtual ICollection<FDirectory> Directories { get; set; }
 }
