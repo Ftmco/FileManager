@@ -28,8 +28,4 @@
     <ProjectReference Include="..\File.Implemention\File.Implemention.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
