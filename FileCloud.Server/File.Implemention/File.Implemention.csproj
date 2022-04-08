@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fteam.Identity.Client" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\File.Abestraction\File.Abstraction.csproj" />
     <ProjectReference Include="..\File.DataBase\File.DataBase.csproj" />
+    <ProjectReference Include="..\File.Extension\File.Extension.csproj" />
   </ItemGroup>
 
 </Project>
