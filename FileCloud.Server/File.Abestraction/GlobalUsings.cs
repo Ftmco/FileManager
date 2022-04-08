@@ -1,4 +1,4 @@
-﻿global using Microsoft.EntityFrameworkCore;
-global using System.Linq.Expressions;
+﻿global using File.Entity;
 global using File.ViewModel;
-global using File.Entity;
+global using Microsoft.EntityFrameworkCore;
+global using System.Linq.Expressions;

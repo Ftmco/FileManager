@@ -1,16 +1,8 @@
-﻿using File.Abstraction;
-using File.DataBase.Context;
-using File.Entity;
-using File.Extension.Code;
+﻿using File.Extension.Code;
 using File.ViewModel;
 using Identity.Client.Rules;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace File.Implemention;
 

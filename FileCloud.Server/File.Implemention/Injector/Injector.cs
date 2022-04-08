@@ -1,5 +1,4 @@
-﻿using File.DataBase.Context;
-using File.Implemention.Base;
+﻿using File.Implemention.Base;
 using Identity.Client.Rules;
 using Identity.Client.Services;
 using Microsoft.Extensions.Configuration;
@@ -43,7 +42,9 @@ public static class Injector
         return Task.FromResult(services);
     }
 
-    public static Task<IServiceCollection> AddToolsAsync(this IServiceCollection services) {
+    public static Task<IServiceCollection> AddToolsAsync(this IServiceCollection services)
+    {
         services.AddTransient<IAccountRules, AccountService>();
-        return Task.FromResult(services); }
+        return Task.FromResult(services);
+    }
 }

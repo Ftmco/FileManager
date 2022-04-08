@@ -1,4 +1,3 @@
-using File.Server.Grpc;
 using Grpc.Core;
 
 namespace File.Server.Grpc.Services

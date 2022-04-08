@@ -1,6 +1,4 @@
-﻿using File.Entity;
-
-namespace File.Implemention;
+﻿namespace File.Implemention;
 
 public class DirectoryViewModel : IDirectoryViewModel
 {

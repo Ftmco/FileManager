@@ -1,6 +1,6 @@
 ﻿namespace File.Abstraction;
 
-public interface IDirectoryGet :IAsyncDisposable
+public interface IDirectoryGet : IAsyncDisposable
 {
     Task<FDirectory?> GetDirectoryAsync(string token);
 

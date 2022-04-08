@@ -15,4 +15,4 @@ public enum FileActionStatus
     DirectoryNotFound = 4,
 }
 
-public record SaveFile(string Base64,string Path,string Name);
+public record SaveFile(string Base64, string Path, string Name);

@@ -1,6 +1,4 @@
-﻿using File.Abstraction.Base;
-
-namespace File.Implemention.Base;
+﻿namespace File.Implemention.Base;
 
 public class BaseQuery<TEntity, TContext> : IAsyncDisposable, IBaseQuery<TEntity, TContext> where TEntity : class where TContext : DbContext
 {

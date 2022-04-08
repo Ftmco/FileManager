@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace File.Abstraction;
 
-namespace File.Abstraction;
-
-public interface IFileViewModel :IAsyncDisposable
+public interface IFileViewModel : IAsyncDisposable
 {
     Task<FileViewModel> CreateFileViewModel(DirectoryFile file);
 }

@@ -1,7 +1,4 @@
-﻿
-using File.Abstraction.Base;
-
-namespace File.Implemention.Base;
+﻿namespace File.Implemention.Base;
 
 public class BaseCud<TEntity, TContext> : IAsyncDisposable, IBaseCud<TEntity, TContext> where TEntity : class where TContext : DbContext
 {

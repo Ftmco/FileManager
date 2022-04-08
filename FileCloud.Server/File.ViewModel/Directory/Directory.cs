@@ -1,6 +1,6 @@
 ﻿namespace File.ViewModel;
 
-public record DirectoryViewModel(Guid Id, Guid? ParentId, string Name,string Token, DateTime CreateDate, DateTime LastUpdate);
+public record DirectoryViewModel(Guid Id, Guid? ParentId, string Name, string Token, DateTime CreateDate, DateTime LastUpdate);
 
 public record UpsertDirectory(Guid? ParentId, Guid? Id, string Name);
 

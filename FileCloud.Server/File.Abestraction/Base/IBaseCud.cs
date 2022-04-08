@@ -1,6 +1,6 @@
 ﻿namespace File.Abstraction.Base;
 
-public interface IBaseCud<TEntity,TContext> where TEntity : class where TContext : DbContext
+public interface IBaseCud<TEntity, TContext> where TEntity : class where TContext : DbContext
 {
     Task<bool> InsertAsync(TEntity entity);
 

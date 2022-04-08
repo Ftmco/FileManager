@@ -1,10 +1,5 @@
 ﻿using File.Extension.Code;
 using File.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace File.Implemention;
 
@@ -38,7 +33,7 @@ public class FileAction : IFileAction
                 Name = $"file_{20.CreateToken()}.{file.Mime.Split("/")[1]}",
                 Token = $"file_{20.CreateToken()}",
             };
-            if(await _fileCud.InsertAsync(directoryFile))
+            if (await _fileCud.InsertAsync(directoryFile))
             {
                 await SaveFileAsync(new(file.Base64, dir.Path, directoryFile.Name));
                 return new CreateFileResponse(FileActionStatus.Success, await _fileViewModel.CreateFileViewModel(directoryFile));
