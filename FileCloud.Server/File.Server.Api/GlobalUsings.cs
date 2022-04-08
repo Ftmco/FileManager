@@ -1,0 +1,1 @@
+﻿global using static File.ViewModel.ApiResponse;
