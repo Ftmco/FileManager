@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\File.Entity\File.Entity.csproj" />
+    <ProjectReference Include="..\File.ViewModel\File.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>
