@@ -18,6 +18,13 @@ public class DirectoryGet : IDirectoryGet
         return ValueTask.CompletedTask;
     }
 
+    public async Task<IEnumerable<ViewModel.DirectoryViewModel>> GetDirectoriesAsync()
+    {
+        var rootDirectories = await _directoryQuery.GetAllAsync(d => d.ParentId == null);
+        var dirViewModels = await _directoryViewModel.CreateDirectoryViewModelAsync(rootDirectories);
+        return dirViewModels;
+    }
+
     public async Task<FDirectory?> GetDirectoryAsync(string token)
     {
         var dir = await _directoryQuery.GetAsync(d => d.Token == token);

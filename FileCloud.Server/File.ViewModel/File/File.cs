@@ -16,3 +16,5 @@ public enum FileActionStatus
 }
 
 public record SaveFile(string Base64, string Path, string Name);
+
+public record GetFileResponse(FileActionStatus Status,string Base64,string Mime,string Extension);

@@ -26,12 +26,15 @@ public static class Injector
     public static Task<IServiceCollection> AddBaseQueryAsync(this IServiceCollection services)
     {
         services.AddScoped<IBaseQuery<FDirectory, FileContext>, BaseQuery<FDirectory, FileContext>>();
+        services.AddScoped<IBaseQuery<DirectoryFile, FileContext>, BaseQuery<DirectoryFile, FileContext>>();
         return Task.FromResult(services);
     }
 
     public static Task<IServiceCollection> AddBaseCudAsync(this IServiceCollection services)
     {
         services.AddScoped<IBaseCud<FDirectory, FileContext>, BaseCud<FDirectory, FileContext>>();
+        services.AddScoped<IBaseCud<DirectoryFile, FileContext>, BaseCud<DirectoryFile, FileContext>>();
+
         return Task.FromResult(services);
     }
 
@@ -39,6 +42,13 @@ public static class Injector
     {
         services.AddTransient<IDirectoryAction, DirectoryAction>();
         services.AddTransient<IDirectoryViewModel, DirectoryViewModel>();
+        services.AddTransient<IDirectoryGet, DirectoryGet>();
+
+        services.AddTransient<IFileAction, FileAction>();
+        services.AddTransient<IFileViewModel, FileViewModel>();
+        services.AddTransient<IFileGet, FileGet>();
+
+
         return Task.FromResult(services);
     }
 

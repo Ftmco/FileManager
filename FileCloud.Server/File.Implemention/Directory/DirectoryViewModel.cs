@@ -2,16 +2,25 @@
 
 public class DirectoryViewModel : IDirectoryViewModel
 {
-    public Task<ViewModel.DirectoryViewModel> CreateDirectoryViewModelAsync(FDirectory directory)
+    readonly IBaseQuery<FDirectory, FileContext> _directoryQuery;
+
+    public DirectoryViewModel(IBaseQuery<FDirectory, FileContext> directoryQuery)
     {
+        _directoryQuery = directoryQuery;
+    }
+
+    public async Task<ViewModel.DirectoryViewModel> CreateDirectoryViewModelAsync(FDirectory directory)
+    {
+        var childs = await _directoryQuery.GetAllAsync(d => d.ParentId == directory.Id);
         ViewModel.DirectoryViewModel directoryViewModel = new(
             Id: directory.Id,
             ParentId: directory.ParentId,
             Name: directory.Name,
             Token: directory.Token,
             CreateDate: directory.CreateDate,
-            LastUpdate: directory.LastUpdateDate);
-        return Task.FromResult(directoryViewModel);
+            LastUpdate: directory.LastUpdateDate,
+            Children: await CreateDirectoryViewModelAsync(childs));
+        return directoryViewModel;
     }
 
     public async Task<IEnumerable<ViewModel.DirectoryViewModel>> CreateDirectoryViewModelAsync(IEnumerable<FDirectory> directories)

@@ -10,9 +10,12 @@ public class DirectoryController : ControllerBase
 {
     readonly IDirectoryAction _directoryAction;
 
-    public DirectoryController(IDirectoryAction directoryAction)
+    readonly IDirectoryGet _dirctoryGet;
+
+    public DirectoryController(IDirectoryAction directoryAction, IDirectoryGet dirctoryGet)
     {
         _directoryAction = directoryAction;
+        _dirctoryGet = dirctoryGet;
     }
 
     [HttpPost("UpsertDirectory")]
@@ -27,5 +30,12 @@ public class DirectoryController : ControllerBase
             DirecttoryActionStatus.ObjectNotFound => Ok(Faild(404, "دایرکتوری مورد نظر یافت نشد", "")),
             _ => Ok(ApiException("خطایی رخ داد مجددا تلاش کنید", "")),
         };
+    }
+
+    [HttpGet("GetDirectories")]
+    public async Task<IActionResult> GetDirectoriesAsync()
+    {
+        var directories = await _dirctoryGet.GetDirectoriesAsync();
+        return Ok(Success("دایرکتوری ها", "", directories));
     }
 }

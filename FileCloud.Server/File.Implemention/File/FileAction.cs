@@ -1,5 +1,6 @@
 ﻿using File.Extension.Code;
 using File.ViewModel;
+using Microsoft.Extensions.Configuration;
 
 namespace File.Implemention;
 
@@ -11,11 +12,14 @@ public class FileAction : IFileAction
 
     readonly IFileViewModel _fileViewModel;
 
-    public FileAction(IDirectoryGet directoryGet, IBaseCud<DirectoryFile, FileContext> fileCud, IFileViewModel fileViewModel)
+    readonly IConfiguration _configuration;
+
+    public FileAction(IDirectoryGet directoryGet, IBaseCud<DirectoryFile, FileContext> fileCud, IFileViewModel fileViewModel, IConfiguration configuration)
     {
         _directoryGet = directoryGet;
         _fileCud = fileCud;
         _fileViewModel = fileViewModel;
+        _configuration = configuration;
     }
 
     public async Task<CreateFileResponse> CreateFileAsync(CreateFile file)
@@ -49,8 +53,19 @@ public class FileAction : IFileAction
         await _directoryGet.DisposeAsync();
     }
 
-    public Task<bool> SaveFileAsync(SaveFile saveFile)
+    public async Task<bool> SaveFileAsync(SaveFile saveFile)
     {
-        throw new NotImplementedException();
+        try
+        {
+            string rootPath = _configuration["BaseDirectories:BaseDir"];
+            string path = rootPath + saveFile.Path + $"/{saveFile.Name}";
+            byte[]? bytes = Convert.FromBase64String(saveFile.Base64);
+            await System.IO.File.WriteAllBytesAsync(path, bytes);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

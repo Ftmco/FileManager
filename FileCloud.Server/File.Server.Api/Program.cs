@@ -13,12 +13,15 @@ await builder.Services.AddFileServicesAsync(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseCors(x =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowAnyOrigin();
+});
 
 app.UseHttpsRedirection();
 
