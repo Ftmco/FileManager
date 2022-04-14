@@ -12,6 +12,8 @@ public interface IBaseCud<TEntity, TContext> where TEntity : class where TContex
 
     Task<bool> DeleteAsync(IEnumerable<TEntity> entities);
 
+    Task<bool> DeleteAsync(object id);
+
     Task<bool> DeleteAsync(TEntity entity);
 
     Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> where);

@@ -41,6 +41,12 @@ public class BaseCud<TEntity, TContext> : IAsyncDisposable, IBaseCud<TEntity, TC
     public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> where)
         => await DeleteAsync(await _dbSet.Where(where).ToListAsync());
 
+    public async Task<bool> DeleteAsync(object id)
+    {
+        TEntity? obj = await _dbSet.FindAsync(id);
+        return obj == null || await DeleteAsync(obj);
+    }
+
     public async ValueTask DisposeAsync()
     {
         await _context.DisposeAsync();
