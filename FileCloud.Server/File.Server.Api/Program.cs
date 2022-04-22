@@ -1,4 +1,5 @@
 using File.Implemention.Injector;
+using Identity.Client.StartUp;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 await builder.Services.AddFileServicesAsync(builder.Configuration);
-
+builder.Services.AddFteamIdentityService();
 
 var app = builder.Build();
 
