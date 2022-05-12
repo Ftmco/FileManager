@@ -24,7 +24,7 @@ app.UseCors(x =>
     .AllowAnyOrigin();
 });
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
