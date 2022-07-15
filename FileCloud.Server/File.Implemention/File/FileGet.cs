@@ -29,6 +29,11 @@ public class FileGet : IFileGet
         return Task.FromResult(dataUrl);
     }
 
+    public Task<GetFileResponse> CropImageAsync(string token, int width, int heigth)
+    {
+        throw new NotImplementedException();
+    }
+
     public ValueTask DisposeAsync()
     {
         GC.SuppressFinalize(this);
@@ -49,15 +54,31 @@ public class FileGet : IFileGet
                     string? path = $"{rootDir}{dir.Path}/{file.Name}";
                     byte[]? bytes = await System.IO.File.ReadAllBytesAsync(path);
                     string? base64 = Convert.ToBase64String(bytes);
-                    return new GetFileResponse(FileActionStatus.Success, await CreateDataUrlAsync(base64, file.Mime), file.Mime, file.Eextension);
+                    return new GetFileResponse(FileActionStatus.Success, file.Mime, file.Eextension)
+                    {
+                        Base64 = await CreateDataUrlAsync(base64, file.Mime)
+                    };
                 }
-                return new GetFileResponse(FileActionStatus.DirectoryNotFound, "", "", "");
+                return new GetFileResponse(FileActionStatus.DirectoryNotFound, "", "");
             }
-            return new GetFileResponse(FileActionStatus.NotFound, "", "", "");
+            return new GetFileResponse(FileActionStatus.NotFound, "", "");
         }
         catch
         {
-            return new GetFileResponse(FileActionStatus.Exception, "", "", "");
+            return new GetFileResponse(FileActionStatus.Exception, "", "");
         }
+    }
+
+    public async Task<GetFileResponse?> GetImageAsync(string token, int width, int heigth, string action)
+        => action switch
+        {
+            "resize" => await ResizeImageAsync(token, width, heigth),
+            "crop" => await CropImageAsync(token, width, heigth),
+            _ => await ResizeImageAsync(token, width, heigth),
+        };
+
+    public Task<GetFileResponse> ResizeImageAsync(string token, int width, int heigth)
+    {
+        throw new NotImplementedException();
     }
 }
